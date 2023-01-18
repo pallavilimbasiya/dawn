@@ -1,0 +1,79 @@
+<div class="popup">
+        <button id="close">&times;</button>
+        <h2>POPUP</h2>
+    </div>
+
+<style>
+.popup {
+    background: rgb(0, 0, 0, 0.7);
+    width: 300px;
+    padding: 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+ 	transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 500ms ease-in-out;
+  	z-index: 99999;
+    border-radius: 8px;
+  	z-index: 99999;
+    border-radius: 8px;
+    display: none;
+}
+  .popup h2{
+  color: yellow;
+  font-size:20px;  
+  }  
+.popup #close {
+    display: block;
+    margin: 0 0 20px auto;
+    background-color: transparent;
+    font-size: 30px;
+    color: #c5c5c5;
+    outline: none;
+    cursor: pointer;
+}
+.popup p {
+    font-size: 14px;
+    text-align: justify;
+    margin: 20px 0;
+}
+</style>  
+
+ <script type="text/javascript">
+  window.addEventListener("load", function () {
+    var popup = localStorage.getItem('popup');
+    if(popup) return;
+    setTimeout(
+        function open(event) {
+          localStorage.setItem('popup',true);
+            document.querySelector(".popup").style.display = "block";
+        },
+        1000
+    )
+})
+
+document.querySelector('#close').addEventListener("click", function () {
+    document.querySelector(".popup").style.display = "none";
+});  
+</script>
+
+{% schema %}
+  {
+    "name": "One Time Popup",
+    "settings": [],
+
+	 "presets": [{
+      "name": "One Time Popup",
+      "category": "Window"
+    }]
+  }
+{% endschema %}
+ 
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

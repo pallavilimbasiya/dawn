@@ -1,0 +1,45 @@
+/* image swatches style */
+label.color-label{
+height:40px;
+width:40px;
+border-radius: 50% !important;
+background-position: center;
+background-size: cover; 
+}
+ /* End image swatches style */
+
+
+
+/* header social icon style */
+.headersocial {
+    padding-left: 20px;
+}
+
+@media (max-width: 1024px){
+  .resposive-icons {
+      display: none!important;
+  }
+}
+/* header social icon style */
+
+
+
+.card__badge {
+    align-self: flex-start !important;
+    grid-row-start: 1 !important;
+    justify-self: flex-start !important;
+}
+
+
+
+.banner-wrapper {
+    padding: 120px;
+    background-color: #e9ba0d;
+}
+h1.banner-title {
+    text-transform: uppercase;
+    font-size: 27px;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+}

@@ -1,0 +1,164 @@
+{% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> {% endcomment %}
+{%- style -%}
+.section-{{ section.id }}-padding {
+  padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+  padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
+}
+.dynamic-font-size {
+  font-size: {{ section.settings.dynamic_font_size | append:'px'}}
+}
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+{% endstyle %}
+
+<section class="main-wrapper">
+  <div class="page-width image-slider section-{{ section.id }}-padding">
+      <h2 class="dynamic-font-size">{{ section.settings.txt }}</h2>
+            <div class="owl-carousel owl-theme page-width">
+              {% for block in section.blocks %}
+                <div class="item">
+                  <img src="{{block.settings.image | img_url: 'master'}}" alt="img">
+                </div>
+              {% endfor %}
+            </div>
+    </div>
+</section>
+
+<style>
+.item img {
+     width: 150px !important;
+    height: 150px !important;
+    margin: auto;
+      border-radius: 100%;
+    object-fit: cover;
+}
+.image-slider {
+/* padding: 30px 0;  */
+}
+.main-wrapper{
+    background-color:#f9f9f9;
+  }
+.item {
+  text-align: center !important;
+}
+.owl-prev span {
+  position: absolute;
+    top: 15%;
+    left: 0;
+    font-size: 50px;
+}
+.owl-next span {
+  position: absolute;
+    top: 15%;
+    right: 0;
+    font-size: 50px;
+}
+.image-slider h2{
+  text-align: center;
+  font-weight:600;
+  padding-bottom: 40px;
+}
+/* .image-slider .owl-dots {
+  display: none;
+} */
+</style>
+    
+
+<script type="text/javascript">
+$('.image-slider .owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    autoplay:true,
+    autoplayTimeout: 3000,
+    stagePadding: 0,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:4
+        },
+        1400:{
+        items: 4
+        }
+    }
+})
+</script>
+{% schema %}
+  {
+    "name": "Image Slider",
+    "settings": [
+              {
+    				"type": "text",
+    				"label": "your Text",
+					"id": "txt"
+				},
+              {
+                    "type": "range",
+                    "id": "dynamic_font_size",
+                    "min": 13,
+                    "max": 60,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Font Size",
+                    "default": 30
+              },
+              {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 4,
+                    "unit": "px",
+                    "label": "t:sections.all.padding.padding_top",
+                    "default": 40
+              },
+              {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 4,
+                    "unit": "px",
+                    "label": "t:sections.all.padding.padding_bottom",
+                    "default": 52
+              }
+    ],
+     "blocks": 	[
+					{
+						"type": "image",
+						"name": "image block",
+						"settings": [
+										{
+											"type": "image_picker",
+											"label": "your image",
+											"id": "image"
+										}
+									]
+					}
+                    
+				],
+    "presets": [{
+      "name": "Image Slider",
+      "category": "Window"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

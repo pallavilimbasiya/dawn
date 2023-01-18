@@ -1,0 +1,93 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<style>
+  div.toastify{
+    display: flex !important;
+    justify-content:space-between;
+    flex-direction:row-reverse;
+  }
+  img.toastify-avatar{
+    width: 50px !important;
+    height: 50px !important;
+     }
+</style>
+    
+{% for block in section.blocks %}
+  {% assign product = block.settings.selectProduct %} 
+     
+<script>
+Toastify({
+  text: "This is product name{{ product.title | truncate:25 }}",
+  destination: "{{ product.url }}",
+  duration: 3000,
+  newWindow: true,
+  avatar: "{{ product.featured_image | img_url: 'medium' }}",
+  close: true,
+  gravity: "bottom", // `top` or `bottom`
+  position: "left", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "white",
+    width: "400px",
+    color: "#000"    
+  },
+  onClick: function(){
+    
+  } // Callback after click
+}).showToast(); 
+</script>
+
+
+{% endfor %}
+
+<script>
+   let timer = Math.random() * (
+</script>
+  
+{% schema %}
+  {
+    "name": "Sales Popup Notification",
+    "settings": [
+      {
+              "type": "number",
+              "id": "maximumTime",
+              "default": 10000,
+              "label": "Max Time"
+            },
+            {
+              "type": "number",
+              "id": "minimumTime",
+              "default": 0,
+              "label": "Mini Time"
+            }
+    ],
+    "blocks":[
+        {
+              "name": "Product",
+              "type": "select-product-popup",
+              "settings": [
+                    {
+                      "type":"product",
+                      "id":"selectProduct",
+                      "label":"product"
+                    },
+                    {
+                      "type": "url",
+                      "id": "view-product",
+                      "label": "product url" 
+                    }
+                ]                  
+           }
+        ],
+      "presets": [{
+      "name": "Sales Popup Notification",
+      "category": "Window"
+    }]
+    }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,71 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script src="{{ 'slick.min.js' | asset_url }}"></script>
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+<div id="slideshow">
+ <div class="wrapper">
+   <center>
+   <h2>{{section .settings.heading}}</h2>
+   </center>
+ <div class="rslides_container">
+ <ul class="rslides" id="slider1">
+{% for product in collections[section.settings.feature_collection].products %}
+ <li class="slideshow-item">
+ <a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: 'medium' | format: 'jpg' }}" alt="{{ block.settings.slide_heading }}"></a> 
+ <h3>{{ product.title }}</h3>
+ <h4>{{ product.price | money | remove: '.00' }}</h4>
+ </li>
+ {% endfor %} 
+ </ul> 
+ </div><!-- #slideshow-container -->
+ </div>
+</div><!-- #slideshow -->
+
+<style>
+#slideshow .wrapper{
+max-width: 1266px;
+  margin: 0 auto;
+}
+</style>
+
+<script type="text/javascript">
+ $('ul#slider1').slick({
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+});
+</script>
+  
+
+
+{% schema %}
+  {
+    "name": "products-slideshow",
+    "settings": [
+				{
+				"type":"text",
+				"label":"Add your Heading",
+				"id":"heading"
+				},
+				{
+				"type":"collection",
+				"label":"Chose Collection to show on slideshow",
+				"id":"feature_collection"
+				}
+					
+				],
+
+	"presets" : [
+
+                {
+                "category":"collections",
+                "name":"Products Slideshow"	
+                }
+                ]
+  }
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

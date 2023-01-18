@@ -1,0 +1,124 @@
+<div class="left-right-section section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="left-right-wrapper">
+      <div class="left-right-img">
+        <img src="{{section.settings.image | img_url: 'master'}}" alt="img">
+      </div>
+      <div class="left-right-content">
+        <p>{{ section.settings.txt }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% style %}
+  .left-right-section {
+    background-color: #f9f9f9;
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+    padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .left-right-wrapper {
+    display: flex;
+    {% if section.settings.position == "left" %}
+      flex-direction: row;
+    {% endif %}
+    {% if section.settings.position == "right" %}
+      flex-direction: row-reverse;
+    {% endif %}
+    justify-content: space-between;
+    align-items: center;
+  }
+  .left-right-img, .left-right-content {
+    width: 48%;
+  }
+  .left-right-img {
+    overflow: hidden;  
+  }
+  .left-right-img img {
+    max-width: 100%;
+    transition: all 0.8s ease;
+    filter: grayscale(1);
+  }
+  .left-right-img img:hover {
+    transform: scale3d(1.2, 1.5, 1.1);
+    filter: grayscale(0);
+  }
+  .left-right-content p {
+    text-align: justify;
+    margin: 0;
+  }
+{% endstyle %}
+
+
+{% schema %}
+  {
+    "name": "Left Right",
+    "settings": [
+                   {
+        				"type": "richtext",
+        				"label": "Description",
+    					"id": "txt"
+    				},
+                    {
+                        "type": "image_picker",
+                        "label": "Select Image",
+                        "id": "image"
+                    },
+                    {
+                    "type": "select",
+                    "id": "position",
+                    "options": [
+                            {
+                              "value": "left",
+                              "label": "Left"
+                            },
+                            {
+                              "value": "right",
+                              "label": "Right"
+                            }
+                    ],
+                        "default": "left",
+                        "label": "Select Image Position"
+                    },
+                    {
+                        "type": "range",
+                        "id": "padding_top",
+                        "min": 0,
+                        "max": 100,
+                        "step": 4,
+                        "unit": "px",
+                        "label": "t:sections.all.padding.padding_top",
+                        "default": 40
+                    },
+                    {
+                        "type": "range",
+                        "id": "padding_bottom",
+                        "min": 0,
+                        "max": 100,
+                        "step": 4,
+                        "unit": "px",
+                        "label": "t:sections.all.padding.padding_bottom",
+                        "default": 52
+                    }
+    ],
+    "presets": [{
+      "name": "Left Right",
+      "category": "Window"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
